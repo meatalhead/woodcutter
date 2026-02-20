@@ -25,7 +25,7 @@ ENV PATH=/root/.local/bin:$PATH
 
 # Copy application code
 COPY backend/app ./app
-COPY frontend/static ./static
+COPY frontend/static ./frontend/static
 
 # Create data directory for SQLite
 RUN mkdir -p /app/data
