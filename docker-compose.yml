@@ -1,13 +1,13 @@
 services:
   app:
-    ## ── Option A: Pull from Docker Hub (recommended) ──
-    #image: ashleykingscote/woodcutter:latest
+    ## ── Option A: Pull from GitHub Container Registry (recommended) ──
+    image: ghcr.io/meatalhead/woodcutter:latest
 
     ## ── Option B: Build from source ──
     ## Comment out 'image' above and uncomment the two lines below:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
 
     container_name: woodcutter-app
     ports:
