@@ -19,13 +19,42 @@ A web-based tool that helps woodworkers minimise waste when cutting stock sheets
 - [Docker](https://docs.docker.com/get-docker/) 20.10+
 - [Docker Compose](https://docs.docker.com/compose/install/) v2+
 
-### Build and Run
+### Option A — Run from Docker Hub (recommended)
+
+Create a `docker-compose.yml`:
+
+```yaml
+services:
+  app:
+    image: ashleykingscote/woodcutter:latest
+    container_name: woodcutter-app
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - DATABASE_URL=sqlite:////app/data/woodcutter.db
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+```
+
+Then run:
+
+```bash
+docker compose up -d
+```
+
+### Option B — Build from source
 
 ```bash
 git clone https://github.com/meatalhead/woodcutter.git
 cd woodcutter
 docker compose up --build -d
 ```
+
+The included `docker-compose.yml` builds locally and volume-mounts the source for development.
+
+---
 
 The app is now running at **http://localhost:8000**.
 
