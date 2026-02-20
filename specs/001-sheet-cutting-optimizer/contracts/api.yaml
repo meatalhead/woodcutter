@@ -1,0 +1,203 @@
+openapi: 3.0.3
+info:
+  title: Sheet Cutting Optimizer API
+  description: REST API for woodworking sheet cutting optimization
+  version: 1.0.0
+  contact:
+    name: Woodcutter Development
+    
+servers:
+  - url: http://localhost:8000/api/v1
+    description: Local development server
+
+tags:
+  - name: stock
+    description: Stock sheet management
+  - name: cuts
+    description: Required cut management
+  - name: plans
+    description: Cutting plan optimization and retrieval
+
+paths:
+  /stock:
+    get:
+      tags: [stock]
+      summary: List all stock sheets
+      responses:
+        '200':
+          description: List of stock sheets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StockSheet'
+                  
+    post:
+      tags: [stock]
+      summary: Add a new stock sheet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StockSheetCreate'
+      responses:
+        '201':
+          description: Stock sheet created
+          
+  /cuts:
+    get:
+      tags: [cuts]
+      summary: List all required cuts
+      responses:
+        '200':
+          description: List of required cuts
+                  
+    post:
+      tags: [cuts]
+      summary: Add a new required cut
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequiredCutCreate'
+      responses:
+        '201':
+          description: Required cut created
+          
+  /plans/optimize:
+    post:
+      tags: [plans]
+      summary: Generate an optimized cutting plan
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OptimizeRequest'
+      responses:
+        '201':
+          description: Cutting plan generated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CuttingPlan'
+
+components:
+  schemas:
+    StockSheet:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        width:
+          type: number
+          minimum: 0.1
+          maximum: 10000
+        length:
+          type: number
+          minimum: 0.1
+          maximum: 10000
+        thickness:
+          type: number
+          minimum: 0.1
+          maximum: 300
+        label:
+          type: string
+          maxLength: 100
+        priority:
+          type: string
+          enum: [high, normal, low]
+          
+    StockSheetCreate:
+      type: object
+      required: [width, length, thickness, label]
+      properties:
+        width:
+          type: number
+        length:
+          type: number
+        thickness:
+          type: number
+        label:
+          type: string
+        priority:
+          type: string
+          enum: [high, normal, low]
+          default: normal
+          
+    RequiredCut:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        width:
+          type: number
+        length:
+          type: number
+        thickness:
+          type: number
+        label:
+          type: string
+        quantity:
+          type: integer
+          minimum: 1
+          
+    RequiredCutCreate:
+      type: object
+      required: [width, length, thickness, label]
+      properties:
+        width:
+          type: number
+        length:
+          type: number
+        thickness:
+          type: number
+        label:
+          type: string
+        quantity:
+          type: integer
+          default: 1
+          
+    OptimizeRequest:
+      type: object
+      properties:
+        kerf_width:
+          type: number
+          default: 3.0
+          
+    CuttingPlan:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        total_waste:
+          type: number
+        sheets_used:
+          type: integer
+        assignments:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlanAssignment'
+          
+    PlanAssignment:
+      type: object
+      properties:
+        sheet_id:
+          type: string
+        cut_id:
+          type: string
+        x_position:
+          type: number
+        y_position:
+          type: number
+        rotation:
+          type: integer
+          enum: [0, 90]
+        sequence_number:
+          type: integer

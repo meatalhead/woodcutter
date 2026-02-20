@@ -1,0 +1,454 @@
+/* LCARS Theme for Sheet Cutting Optimizer */
+
+:root {
+  --lcars-orange: #FF9900;
+  --lcars-orange-light: #FFCC99;
+  --lcars-blue: #9999FF;
+  --lcars-blue-dark: #6688CC;
+  --lcars-magenta: #CC6699;
+  --lcars-black: #000000;
+  --lcars-white: #FFFFFF;
+  --lcars-gray: #444444;
+}
+
+body {
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  background-color: var(--lcars-black);
+  color: var(--lcars-white);
+  margin: 0;
+  padding: 0;
+}
+
+/* Mobile Navigation Header */
+.mobile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--lcars-gray);
+  border-bottom: 4px solid var(--lcars-blue);
+  padding: 0;
+}
+
+.mobile-header h1 {
+  margin: 0;
+  flex: 1;
+}
+
+/* Hamburger Menu Button */
+.hamburger-menu {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  justify-content: center;
+}
+
+.hamburger-menu span {
+  display: block;
+  width: 28px;
+  height: 3px;
+  background-color: var(--lcars-orange);
+  transition: all 0.3s ease;
+}
+
+.hamburger-menu.active span:nth-child(1) {
+  transform: rotate(45deg) translate(10px, 10px);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(8px, -8px);
+}
+
+/* Mobile Navigation Menu */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background-color: var(--lcars-gray);
+  border-bottom: 2px solid var(--lcars-blue);
+  z-index: 999;
+}
+
+.mobile-menu.active {
+  display: flex;
+}
+
+.menu-item {
+  background: none;
+  border: none;
+  color: var(--lcars-white);
+  padding: 16px 20px;
+  text-align: left;
+  cursor: pointer;
+  border-bottom: 1px solid #555;
+  font-size: 16px;
+  min-height: 44px;
+  transition: background-color 0.2s;
+}
+
+.menu-item:hover {
+  background-color: #555;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+/* Desktop: Hide mobile navigation by default */
+@media (min-width: 768px) {
+  .hamburger-menu,
+  .mobile-menu {
+    display: none !important;
+  }
+  
+  .mobile-header {
+    border-bottom: none;
+  }
+}
+
+/* LCARS Panel Styles */
+.lcars-panel {
+  background-color: var(--lcars-gray);
+  border: 4px solid var(--lcars-blue);
+  border-radius: 24px;
+  padding: 20px;
+  margin: 10px;
+}
+
+/* LCARS Button Styles */
+.lcars-button {
+  background-color: var(--lcars-orange);
+  color: var(--lcars-black);
+  border: none;
+  border-radius: 50px;
+  padding: 12px 32px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  min-height: 44px;
+  min-width: 120px;
+}
+
+.lcars-button:hover {
+  background-color: var(--lcars-orange-light);
+  transform: translateY(-2px);
+}
+
+.lcars-button:active {
+  transform: translateY(0);
+}
+
+.lcars-button.secondary {
+  background-color: var(--lcars-blue);
+}
+
+.lcars-button.secondary:hover {
+  background-color: var(--lcars-blue-dark);
+}
+
+/* LCARS Input Styles */
+.lcars-input {
+  background-color: var(--lcars-gray);
+  color: var(--lcars-white);
+  border: 2px solid var(--lcars-blue);
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  min-height: 44px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.lcars-input:focus {
+  outline: none;
+  border-color: var(--lcars-orange);
+}
+
+/* LCARS Heading Styles */
+.lcars-heading {
+  color: var(--lcars-orange);
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 20px 0 10px 0;
+  padding-bottom: 8px;
+  border-bottom: 4px solid var(--lcars-orange);
+}
+
+.lcars-label {
+  color: var(--lcars-blue);
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 4px;
+  display: block;
+}
+
+/* LCARS List Styles */
+.lcars-list-item {
+  background-color: var(--lcars-gray);
+  border-left: 6px solid var(--lcars-blue);
+  padding: 12px 16px;
+  margin: 8px 0;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .lcars-list-item {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+/* Priority Badge Styles */
+.priority-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  min-height: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.priority-high {
+  background-color: var(--lcars-orange);
+  color: var(--lcars-black);
+}
+
+.priority-normal {
+  background-color: var(--lcars-blue);
+  color: var(--lcars-black);
+}
+
+.priority-low {
+  background-color: var(--lcars-gray);
+  color: var(--lcars-white);
+  border: 1px solid var(--lcars-white);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .lcars-panel {
+    border-width: 2px;
+    padding: 16px;
+    margin: 8px;
+    border-radius: 16px;
+  }
+  
+  .lcars-heading {
+    font-size: 18px;
+  }
+  
+  .lcars-button {
+    width: 100%;
+    margin: 8px 0;
+    font-size: 13px;
+    padding: 12px 24px;
+  }
+  
+  .container {
+    padding: 0;
+  }
+  
+  .main-content {
+    padding: 0;
+  }
+  
+  .lcars-label {
+    font-size: 11px;
+  }
+  
+  .lcars-input {
+    font-size: 16px;
+  }
+}
+
+/* Mobile-Specific Styling */
+@media (max-width: 375px) {
+  .lcars-panel {
+    border-width: 2px;
+    padding: 12px;
+    border-radius: 12px;
+  }
+  
+  .lcars-heading {
+    font-size: 16px;
+    margin: 12px 0 8px 0;
+  }
+  
+  .lcars-button {
+    font-size: 12px;
+    padding: 10px 16px;
+    min-width: 100px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  body {
+    background-color: white;
+    color: black;
+  }
+  
+  .lcars-panel {
+    border-color: black;
+    page-break-inside: avoid;
+  }
+  
+  .lcars-button {
+    display: none;
+  }
+  
+  @page {
+    size: A4;
+    margin: 20mm;
+  }
+}
+
+/* Diagram Styles */
+.diagram-wrapper {
+  background: #111;
+  padding: 20px;
+  border-radius: 12px;
+  border: 2px solid var(--lcars-blue);
+  margin: 20px 0;
+  overflow-x: auto;
+  touch-action: manipulation;
+}
+
+.diagram-wrapper svg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+  touch-action: none;
+}
+
+#diagrams-section {
+  border-top: 2px solid var(--lcars-blue);
+  padding-top: 20px;
+}
+
+#diagrams-container {
+  margin-top: 15px;
+}
+
+/* Print-specific styles for A4 pages */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 15mm;
+  }
+  
+  body {
+    background-color: white;
+    color: black;
+  }
+  
+  /* Hide UI elements not needed for print */
+  header,
+  .lcars-button:not(.print-only),
+  #stock-section,
+  #cuts-section,
+  #optimization-section,
+  .no-print {
+    display: none !important;
+  }
+  
+  /* Print page layout */
+  .print-page {
+    page-break-after: always;
+    width: 210mm;
+    min-height: 297mm;
+    padding: 15mm;
+    background: white;
+    color: black;
+  }
+  
+  .print-page:last-child {
+    page-break-after: auto;
+  }
+  
+  /* Print typography */
+  .print-header {
+    border-bottom: 2px solid #000;
+    padding-bottom: 10mm;
+    margin-bottom: 10mm;
+  }
+  
+  .print-cut-number {
+    font-size: 24pt;
+    font-weight: bold;
+    margin-bottom: 5mm;
+    color: #000;
+  }
+  
+  .print-cut-label {
+    font-size: 18pt;
+    margin-bottom: 5mm;
+    color: #000;
+  }
+  
+  .print-dimensions {
+    font-size: 16pt;
+    margin-bottom: 3mm;
+    color: #000;
+  }
+  
+  .print-sheet-info {
+    font-size: 14pt;
+    color: #333;
+    margin-bottom: 5mm;
+  }
+  
+  .print-diagram {
+    margin: 10mm 0;
+    border: 1px solid #ccc;
+    padding: 5mm;
+    background: #f9f9f9;
+  }
+  
+  .print-instructions {
+    font-size: 12pt;
+    margin-top: 10mm;
+    padding: 5mm;
+    background: #f0f0f0;
+    border-left: 4px solid #333;
+    color: #000;
+  }
+  
+  /* Force diagram colors for print */
+  .print-diagram svg {
+    background: white !important;
+  }
+  
+  .print-diagram rect[fill="#ff8800"] {
+    fill: #ff8800 !important;
+    fill-opacity: 0.3 !important;
+  }
+  
+  /* High contrast for print */
+  .print-diagram text {
+    fill: #000 !important;
+    stroke: none !important;
+  }
+  
+  .print-diagram line {
+    stroke: #666 !important;
+  }
+}
